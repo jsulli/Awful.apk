@@ -150,17 +150,12 @@ public abstract class AwfulRequest<T> {
      * @return A result to pass into queueRequest. (AwfulApplication implements queueRequest, AwfulActivity provides a convenience shortcut to access it)
      */
     public Request<T> build(ProgressListener prog, final AwfulResultCallback<T> resultListener){
-        return build(prog, new Response.Listener<T>() {
-            @Override
-            public void onResponse(T response) {
-                if(resultListener != null){
-                    resultListener.success(response);
-                }
+        return build(prog, response -> {
+            if(resultListener != null){
+                resultListener.success(response);
             }
         },
-        new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+            error -> {
                 // TODO: 29/10/2017 this is a temporary warning/advice for people on older devices who can't connect - remove it once there's something better for recommending security updates
                 if (error != null && StringUtils.contains(error.getMessage(), "SSLProtocolException")) {
                     Toast.makeText(cont, R.string.ssl_connection_error_message, Toast.LENGTH_LONG).show();
@@ -168,8 +163,7 @@ public abstract class AwfulRequest<T> {
                 if(resultListener != null){
                     resultListener.failure(error);
                 }
-            }
-        });
+            });
     }
 
     /**

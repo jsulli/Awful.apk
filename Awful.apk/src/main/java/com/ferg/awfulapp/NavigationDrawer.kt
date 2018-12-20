@@ -14,7 +14,7 @@ import android.widget.TextView
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.ImageLoader
 import com.ferg.awfulapp.ForumDisplayFragment.NULL_FORUM_ID
-import com.ferg.awfulapp.ThreadDisplayFragment.NULL_THREAD_ID
+import com.ferg.awfulapp.ThreadDisplayFragment.Companion.NULL_THREAD_ID
 import com.ferg.awfulapp.announcements.AnnouncementsManager
 import com.ferg.awfulapp.constants.Constants
 import com.ferg.awfulapp.network.NetworkUtils
